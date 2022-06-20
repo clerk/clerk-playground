@@ -1,10 +1,15 @@
-import "/styles/globals.css";
-import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import Link from "next/link";
-import Script from "next/script";
-import Layout from "/components/Layout";
+import '/styles/globals.css';
+import {
+  ClerkProvider,
+  RedirectToSignUp,
+  SignedIn,
+  SignedOut
+} from '@clerk/nextjs';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import Link from 'next/link';
+import Script from 'next/script';
+import Layout from '/components/Layout';
 
 /**
  * List pages you want to be publicly accessible, or leave empty if
@@ -14,7 +19,7 @@ import Layout from "/components/Layout";
  *  "/foo/bar"       for pages/foo/bar.js
  *  "/foo/[...bar]"  for pages/foo/[...bar].js
  */
-const publicPages = ["/", "/sign-in/[[...index]]", "/sign-up/[[...index]]"];
+const publicPages = ['/sign-in/[[...index]]', '/sign-up', '/verify'];
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -29,7 +34,10 @@ const MyApp = ({ Component, pageProps }) => {
         <title>Clerk SDK Playground</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.css" rel="stylesheet" />
+        <link
+          href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.css"
+          rel="stylesheet"
+        />
       </Head>
       <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js" />
       <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js" />
@@ -42,15 +50,7 @@ const MyApp = ({ Component, pageProps }) => {
               <Component {...pageProps} />
             </SignedIn>
             <SignedOut>
-              <main>
-                <p>
-                  Please{" "}
-                  <Link href="/sign-in">
-                    <a>sign in</a>
-                  </Link>{" "}
-                  to access this page.
-                </p>
-              </main>
+              <RedirectToSignUp />
             </SignedOut>
           </>
         )}
