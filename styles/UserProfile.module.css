@@ -1,11 +1,8 @@
-.container {
-  max-width: 45em;
-  margin: 0 auto;
-}
-
-.container > p {
-  font-size: 18px;
-  line-height: 1.4;
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .field {
@@ -24,12 +21,12 @@
 
 .field > label {
   font-weight: 600;
-  margin: 16px;
+  margin: 8px;
 }
 
 .field > input {
   padding: 2px 6px;
-  margin: 8px;
+  margin: 4px;
 }
 
 .button {
@@ -55,13 +52,6 @@
   cursor: not-allowed;
 }
 
-.section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .img {
   vertical-align: middle;
   width: 200px;
@@ -72,8 +62,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  width: 50vw;
-  height: 50vh;
+  height: 30vh;
   justify-content: center;
   align-items: center;
 }
@@ -81,8 +70,7 @@
 .names {
   display: flex;
   flex-direction: column;
-  width: 50vw;
-  height: 50vh;
+  height: 40vh;
   justify-content: center;
   align-items: center;
 }
@@ -90,7 +78,7 @@
 .profileImage {
   display: flex;
   flex-direction: row;
-  width: 50vw;
   justify-content: center;
   align-items: center;
+  margin-top: 16px;
 }

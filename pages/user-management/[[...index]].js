@@ -1,5 +1,6 @@
 import { useUser } from '@clerk/nextjs';
 import styles from '/styles/UserProfile.module.css';
+import Link from 'next/link';
 
 const UserPage = () => {
   const { user } = useUser();
@@ -26,11 +27,15 @@ const UserPage = () => {
         <p>
           Clerk makes it easy to collect information about your users. If your
           user has not provided a first name and last name, they can enter it
-          below. For more information about the properties available on the User
+          below.
+        </p>
+        <p>
+          For more information about the properties available on the User
           object, check out Clerk's{' '}
-          <a href="https://clerk.dev/docs/reference/clerkjs/user">
-            documentation
-          </a>
+          <Link href="https://clerk.dev/docs/reference/clerkjs/user">
+            <a>documentation</a>
+          </Link>
+          .
         </p>
         <div className={styles.field}>
           <label htmlFor="firstName">First Name</label>
@@ -54,8 +59,17 @@ const UserPage = () => {
           Submit
         </button>
       </form>
+
+      <h1>Profile Image</h1>
+      <p>
+        Your user can upload an image to be used as their profile avatar. Upload
+        an image below.
+      </p>
+      <img
+        src={user.profileImageUrl ? user.profileImageUrl : null}
+        className={styles.img}
+      />
       <form onSubmit={handleSubmitImage} className={styles.profileImage}>
-        <img src={user.profileImageUrl} className={styles.img} />
         <div className={styles.field}>
           <label htmlFor="profileImage">Profile Image</label>
           <input id="profileImage" name="profileImage" type="file" required />
