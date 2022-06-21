@@ -1,8 +1,8 @@
-import styles from "/styles/Home.module.css";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { withServerSideAuth } from "@clerk/nextjs/ssr";
-import React from "react";
-import Link from "next/link";
+import styles from '/styles/App.module.css';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
+import { withServerSideAuth } from '@clerk/nextjs/ssr';
+import React from 'react';
+import Link from 'next/link';
 
 export const getServerSideProps = withServerSideAuth();
 
@@ -12,7 +12,10 @@ const ClerkFeatures = () => (
       <img alt="Explore Clerk components" src="/icons/layout.svg" />
       <div>
         <h3>Explore features provided by Clerk</h3>
-        <p>Interact with the user button, user profile, and more to preview what your users will see</p>
+        <p>
+          Interact with the user button, user profile, and more to preview what
+          your users will see
+        </p>
       </div>
       <div className={styles.arrow}>
         <img src="/icons/arrow-right.svg" />
@@ -28,8 +31,8 @@ const SSRDemoLink = () => (
       <div>
         <h3>Visit the SSR demo page</h3>
         <p>
-          See how Clerk hydrates the auth state during SSR and CSR, enabling server-side generation even for
-          authenticated pages
+          See how Clerk hydrates the auth state during SSR and CSR, enabling
+          server-side generation even for authenticated pages
         </p>
       </div>
       <div className={styles.arrow}>
@@ -45,7 +48,10 @@ const MiddlewareProtectedPageLink = () => (
       <img alt="Protected pagefvisi" src="/icons/shield-check.svg" />
       <div>
         <h3>Visit page protected by _middleware</h3>
-        <p>Find out how you can use Next.js middleware and Clerk stateless auth to protect entire routes at the edge</p>
+        <p>
+          Find out how you can use Next.js middleware and Clerk stateless auth
+          to protect entire routes at the edge
+        </p>
       </div>
       <div className={styles.arrow}>
         <img src="/icons/arrow-right.svg" />
@@ -60,7 +66,10 @@ const SignupLink = () => (
       <img alt="Sign up" src="/icons/user-plus.svg" />
       <div>
         <h3>Sign up for an account</h3>
-        <p>Sign up and sign in to explore all the features provided by Clerk out-of-the-box</p>
+        <p>
+          Sign up and sign in to explore all the features provided by Clerk
+          out-of-the-box
+        </p>
       </div>
       <div className={styles.arrow}>
         <img src="/icons/arrow-right.svg" />
@@ -96,7 +105,9 @@ const Main = () => (
       <p className={styles.description}>You have successfully signed in</p>
     </SignedIn>
     <SignedOut>
-      <p className={styles.description}>Sign up for an account to get started</p>
+      <p className={styles.description}>
+        Sign up for an account to get started
+      </p>
     </SignedOut>
 
     <div className={styles.cards}>
@@ -123,7 +134,10 @@ const Main = () => (
             <img src="/icons/settings.svg" />
             <div>
               <h3>Configure settings for your app</h3>
-              <p>Visit Clerk to manage instances and configure settings for user management, theme, and more</p>
+              <p>
+                Visit Clerk to manage instances and configure settings for user
+                management, theme, and more
+              </p>
             </div>
             <div className={styles.arrow}>
               <img src="/icons/arrow-right.svg" />
@@ -158,27 +172,39 @@ const APIRequest = () => {
       window.Prism.highlightAll();
     }
   });
-  const [response, setResponse] = React.useState("// Click above to run the request");
+  const [response, setResponse] = React.useState(
+    '// Click above to run the request'
+  );
   const makeRequest = async () => {
-    setResponse("// Loading...");
+    setResponse('// Loading...');
 
     try {
-      const res = await fetch("/api/getAuthenticatedUserId");
+      const res = await fetch('/api/getAuthenticatedUserId');
       const body = await res.json();
-      setResponse(JSON.stringify(body, null, "  "));
+      setResponse(JSON.stringify(body, null, '  '));
     } catch (e) {
-      setResponse("// There was an error with the request. Please contact support@clerk.dev");
+      setResponse(
+        '// There was an error with the request. Please contact support@clerk.dev'
+      );
     }
   };
   return (
     <div className={styles.backend}>
       <h2>API request example</h2>
       <div className={styles.card}>
-        <button target="_blank" rel="noopener" className={styles.cardContent} onClick={() => makeRequest()}>
+        <button
+          target="_blank"
+          rel="noopener"
+          className={styles.cardContent}
+          onClick={() => makeRequest()}
+        >
           <img src="/icons/server.svg" />
           <div>
             <h3>fetch('/api/getAuthenticatedUserId')</h3>
-            <p>Retrieve the user ID of the signed in user, or null if there is no user</p>
+            <p>
+              Retrieve the user ID of the signed in user, or null if there is no
+              user
+            </p>
           </div>
           <div className={styles.arrow}>
             <img src="/icons/download.svg" />
@@ -188,8 +214,12 @@ const APIRequest = () => {
       <h4>
         Response
         <em>
-          <SignedIn>You are signed in, so the request will return your user ID</SignedIn>
-          <SignedOut>You are signed out, so the request will return null</SignedOut>
+          <SignedIn>
+            You are signed in, so the request will return your user ID
+          </SignedIn>
+          <SignedOut>
+            You are signed out, so the request will return null
+          </SignedOut>
         </em>
       </h4>
       <pre>
@@ -206,7 +236,7 @@ const APIRequest = () => {
 // Footer component
 const Footer = () => (
   <footer className={styles.footer}>
-    Powered by{" "}
+    Powered by{' '}
     <a
       href="https://clerk.dev?utm_source=github&utm_medium=starter_repos&utm_campaign=nextjs_starter"
       target="_blank"
