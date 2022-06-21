@@ -19,7 +19,11 @@ import Layout from '/components/Layout';
  *  "/foo/bar"       for pages/foo/bar.js
  *  "/foo/[...bar]"  for pages/foo/[...bar].js
  */
-const publicPages = ['/sign-in/[[...index]]', '/sign-up', '/verify'];
+const publicPages = [
+  '/sign-in/[[...index]]',
+  '/sign-up/[[...index]]',
+  '/verify'
+];
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
