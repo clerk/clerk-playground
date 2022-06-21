@@ -1,6 +1,7 @@
 import { useClerk, useSignUp } from '@clerk/nextjs';
 import { useEffect, useState } from 'react';
-import styles from '/styles/SignUp.module.css';
+
+import common from '/styles/Common.module.css';
 
 const VerificationPage = () => {
   const [sent, setSent] = useState(false);
@@ -24,13 +25,13 @@ const VerificationPage = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={common.container}>
       <h1>Welcome to the Clerk Playground!</h1>
       <p>
         Check your email inbox for a sign in link. It will expire in 10 minutes.
       </p>
       <button
-        className={styles.button}
+        className={common.button}
         type="button"
         disabled={sent}
         onClick={sendMagicLink}

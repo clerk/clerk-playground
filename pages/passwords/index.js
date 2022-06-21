@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import common from '/styles/Common.module.css';
 import styles from '/styles/Passwords.module.css';
 
 const Passwords = () => {
@@ -83,7 +84,7 @@ const Passwords = () => {
   }, [simplePassword, complexPassword]);
 
   return (
-    <div className={styles.container}>
+    <div className={common.container}>
       <h1 className={styles.title}>Passwords</h1>
       <p>
         One of the most common authentication methods is to use a password. The
@@ -98,7 +99,7 @@ const Passwords = () => {
       <p>
         Go ahead and set either a simple or complex password on your account.
         You will then be able to{' '}
-        <a className={styles.link} href="/sign-in" onClick={signOut}>
+        <a className={common.link} href="/sign-in" onClick={signOut}>
           sign out and back in
         </a>{' '}
         with a password.
@@ -138,7 +139,7 @@ const Passwords = () => {
             ))}
           </ul>
         </div>
-        <button className={styles.button} type="submit" disabled={invalid}>
+        <button className={common.button} type="submit" disabled={invalid}>
           Set password
         </button>
       </form>

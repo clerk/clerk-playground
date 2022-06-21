@@ -9,15 +9,3 @@
     padding: 1rem 2rem;
   }
 }
-
-.link {
-  color: #6c47ff;
-  border-bottom: 1px solid #6c47ff;
-  transition: all 0.3s linear;
-}
-
-.link:hover,
-.link:focus {
-  color: #a690ff;
-  border-bottom-color: #a690ff;
-}
