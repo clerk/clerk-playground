@@ -47,7 +47,7 @@ const UserPage = () => {
               id="firstName"
               name="firstName"
               type="text"
-              placeholder={user.firstName ? user.firstName : 'First name'}
+              placeholder={user.firstName || 'First name'}
             />
           </div>
           <div className={styles.field}>
@@ -56,11 +56,11 @@ const UserPage = () => {
               id="lastName"
               name="lastName"
               type="text"
-              placeholder={user.lastName ? user.lastName : 'Last name'}
+              placeholder={user.lastName || 'Last name'}
             />
           </div>
         </div>
-        <button className={styles.button} type="submit">
+        <button className={common.button} type="submit">
           Submit
         </button>
       </form>
@@ -83,8 +83,8 @@ const UserPage = () => {
             <input id="profileImage" name="profileImage" type="file" required />
           </div>
         </div>
-        <button className={styles.button} type="submit">
-          Update Image
+        <button className={common.button} type="submit">
+          Upload Image
         </button>
       </form>
     </section>
