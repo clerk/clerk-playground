@@ -67,7 +67,7 @@ const UserPage = () => {
 
       <form onSubmit={handleSubmitImage} className={styles.form}>
         <div>
-          <h1>Profile Image</h1>
+          <h1>Profile image</h1>
           <p>
             Your user can upload an image to be used as their profile avatar.
             Upload an image below.
