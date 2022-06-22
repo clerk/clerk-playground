@@ -25,7 +25,7 @@ const Home = () => {
     },
     {
       name: 'User Profile',
-      path: '#profile'
+      path: '/user-profile'
     }
   ];
 
