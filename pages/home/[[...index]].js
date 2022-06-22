@@ -5,7 +5,7 @@ const Home = () => {
   const features = [
     {
       name: 'Passwords',
-      path: '#passwords'
+      path: '/passwords'
     },
     {
       name: 'One-Time Passcodes',
