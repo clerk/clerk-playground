@@ -1,14 +1,9 @@
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 import styles from '/styles/OAuth.module.css';
-import Link from 'next/link';
 import common from '/styles/Common.module.css';
 
 const OAuthPage = () => {
-  return <SignInOAuthButtons />;
-};
-
-function SignInOAuthButtons() {
   const { user } = useUser();
   const router = useRouter();
   const verifiedConnections = [];
@@ -51,7 +46,7 @@ function SignInOAuthButtons() {
           className={common.button}
           onClick={() => connectAccount('oauth_google')}
         >
-          Sign in with Google
+          Connect your Google account
         </button>
         {verifiedConnections.includes('oauth_google') && (
           <p className={styles.p}>Connected!</p>
@@ -62,7 +57,7 @@ function SignInOAuthButtons() {
           className={common.button}
           onClick={() => connectAccount('oauth_github')}
         >
-          Sign in with GitHub
+          Connect your GitHub account
         </button>
         {verifiedConnections.includes('oauth_github') && (
           <p className={styles.p}>Connected!</p>
@@ -73,7 +68,7 @@ function SignInOAuthButtons() {
           className={common.button}
           onClick={() => connectAccount('oauth_twitter')}
         >
-          Sign in with Twitter
+          Connect your Twitter account
         </button>
         {verifiedConnections.includes('oauth_twitter') && (
           <p className={styles.p}>Connected!</p>
@@ -81,6 +76,6 @@ function SignInOAuthButtons() {
       </div>
     </div>
   );
-}
+};
 
 export default OAuthPage;
