@@ -2,22 +2,32 @@ import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 import styles from '/styles/OAuth.module.css';
 import common from '/styles/Common.module.css';
+import { useEffect, useState } from 'react';
 
 const OAuthPage = () => {
   const { user } = useUser();
   const router = useRouter();
-  const verifiedConnections = [];
+  const [verifiedConnections, setVerifiedConnections] = useState([]);
 
-  const connectAccount = async (strategy) => {
-    const res = await user
-      .createExternalAccount({
-        strategy: strategy,
-        redirect_url: '/oauth'
-      })
-      .catch((error) => console.error(error));
-
-    if (res.verification.status !== 'verified') {
-      router.push(res.verification.externalVerificationRedirectURL);
+  const toggleAccountConnection = async (strategy) => {
+    if (!verifiedConnections.includes(strategy)) {
+      const res = await user
+        .createExternalAccount({
+          strategy: strategy,
+          redirect_url: '/oauth'
+        })
+        .catch((error) => console.error(error));
+      if (res) {
+        router.push(res.verification.externalVerificationRedirectURL);
+      }
+    } else {
+      const accountToDelete = user.externalAccounts.find(
+        (account) => account.verification.strategy === strategy
+      );
+      const res = await accountToDelete
+        .destroy()
+        .catch((error) => console.log(error));
+      return res;
     }
   };
 
@@ -25,22 +35,17 @@ const OAuthPage = () => {
     const res = user.externalAccounts.filter(
       (account) => account.verification.status === 'verified'
     );
-    res.map((connection) =>
-      verifiedConnections.push(connection.verification.strategy)
-    );
-  };
-
-  const deleteConnection = async (strategy) => {
-    const accountToDelete = user.externalAccounts.filter(
-      (account) => account.verification.strategy === strategy
-    )[0];
-    const res = await accountToDelete
-      .destroy()
-      .catch((error) => console.log(error));
     return res;
   };
 
-  getVerifiedConnections();
+  useEffect(() => {
+    if (user) {
+      const connections = getVerifiedConnections().map(
+        (connection) => connection.verification.strategy
+      );
+      setVerifiedConnections(connections);
+    }
+  }, [user]);
 
   // Render a button for each supported OAuth provider
   // you want to add to your app
@@ -55,15 +60,12 @@ const OAuthPage = () => {
       <div className={styles.oauth}>
         <button
           className={common.button}
-          onClick={() =>
-            !verifiedConnections.includes('oauth_google')
-              ? connectAccount('oauth_google')
-              : deleteConnection('oauth_google')
-          }
+          onClick={() => toggleAccountConnection('oauth_google')}
         >
           {!verifiedConnections.includes('oauth_google')
-            ? 'Connect your Google account'
-            : 'Disconnect your Google account'}
+            ? 'Connect'
+            : 'Disconnect'}{' '}
+          your Google account
         </button>
         {verifiedConnections.includes('oauth_google') && (
           <p className={styles.p}>Connected!</p>
@@ -73,15 +75,12 @@ const OAuthPage = () => {
       <div className={styles.oauth}>
         <button
           className={common.button}
-          onClick={() =>
-            !verifiedConnections.includes('oauth_github')
-              ? connectAccount('oauth_github')
-              : deleteConnection('oauth_github')
-          }
+          onClick={() => toggleAccountConnection('oauth_github')}
         >
           {!verifiedConnections.includes('oauth_github')
-            ? 'Connect your GitHub account'
-            : 'Disconnect your GitHub account'}
+            ? 'Connect'
+            : 'Disconnect'}{' '}
+          your GitHub account
         </button>
         {verifiedConnections.includes('oauth_github') && (
           <p className={styles.p}>Connected!</p>
@@ -91,15 +90,12 @@ const OAuthPage = () => {
       <div className={styles.oauth}>
         <button
           className={common.button}
-          onClick={() =>
-            !verifiedConnections.includes('oauth_twitter')
-              ? connectAccount('oauth_twitter')
-              : deleteConnection('oauth_twitter')
-          }
+          onClick={() => toggleAccountConnection('oauth_twitter')}
         >
           {!verifiedConnections.includes('oauth_twitter')
-            ? 'Connect your Twitter account'
-            : 'Disconnect your Twitter account'}
+            ? 'Connect'
+            : 'Disconnect'}{' '}
+          your Twitter account
         </button>
         {verifiedConnections.includes('oauth_twitter') && (
           <p className={styles.p}>Connected!</p>
