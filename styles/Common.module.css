@@ -1,11 +1,20 @@
 .container {
-  max-width: 45em;
-  margin: 0 auto;
+  min-height: 350px;
+  padding: 20px;
+  background-color: rgba(241, 241, 241, 0.5);
+  backdrop-filter: blur(2px);
 }
 
 .container > p {
   font-size: 18px;
   line-height: 1.4;
+}
+
+.title {
+  margin: 0 0 24px;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1;
 }
 
 .link {

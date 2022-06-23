@@ -16,7 +16,7 @@ const VerificationPage = () => {
     }, 10000);
 
     await startMagicLinkFlow({
-      redirectUrl: `${window.location.origin}/home`
+      redirectUrl: `${window.location.origin}/`
     });
   };
 
