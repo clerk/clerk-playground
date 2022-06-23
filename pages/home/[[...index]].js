@@ -26,7 +26,7 @@ const Home = () => {
     },
     {
       name: 'OAuth Social Providers',
-      path: '#oauth'
+      path: '/oauth'
     },
     {
       name: 'Multifactor Auth (MFA)',
