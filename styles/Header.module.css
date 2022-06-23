@@ -12,3 +12,19 @@
   font-weight: 700;
   letter-spacing: -0.02em;
 }
+
+.p {
+  color: #fff;
+}
+
+.link {
+  color: #d2c7ff;
+  border-bottom: 1px solid #d2c7ff;
+  transition: all 0.3s linear;
+}
+
+.link:hover,
+.link:focus {
+  color: #a690ff;
+  border-bottom-color: #a690ff;
+}
