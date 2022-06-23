@@ -10,6 +10,9 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
+      <Link href="/">
+        <a className={styles.logo}>Clerk Playground</a>
+      </Link>
       <SignedOut>
         {asPath !== '/sign-in' ? (
           <p>
