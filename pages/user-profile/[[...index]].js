@@ -1,48 +1,52 @@
 import { useUser } from '@clerk/nextjs';
-import styles from '/styles/UserProfile.module.css';
 import Link from 'next/link';
-import common from '/styles/Common.module.css';
 
-const UserPage = () => {
+import common from '/styles/Common.module.css';
+import styles from '/styles/UserProfile.module.css';
+
+const UserProfilePage = () => {
   const { user } = useUser();
 
   const handleSubmit = async (event) => {
     const formData = new FormData(event.target);
-    const newFirstName = formData.get('firstName');
-    const newLastName = formData.get('lastName');
+    const firstName = formData.get('firstName');
+    const lastName = formData.get('lastName');
+
     event.preventDefault();
-    await user.update({ firstName: newFirstName, lastName: newLastName });
+
+    await user.update({ firstName, lastName });
   };
 
   const handleSubmitImage = async (event) => {
     const formData = new FormData(event.target);
-    const profileImage = formData.get('profileImage');
+    const file = formData.get('profileImage');
+
     event.preventDefault();
-    await user.setProfileImage({ file: profileImage });
+
+    await user.setProfileImage({ file });
   };
 
   return (
-    <section className={styles.section}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div>
-          <h1>User profile</h1>
-          <p>
-            Clerk makes it easy to collect information about your users. If your
-            user has not provided a first name and last name, they can enter it
-            below.
-          </p>
-          <p>
-            For more information about the properties available on the User
-            object, check out Clerk's{' '}
-            <Link href="https://clerk.dev/docs/reference/clerkjs/user">
-              <a className={common.link}>documentation</a>
-            </Link>
-            .
-          </p>
-        </div>
-        <div className={styles.container}>
+    <div className={common.container}>
+      <h1 className={common.title}>User Profile</h1>
+      <p>
+        Clerk makes it easy to collect information about your users. If first
+        name and last name were not collected during sign up, they can be added
+        later with a custom form. Your user can also upload an image to be used
+        as their profile avatar.
+      </p>
+      <p>
+        For more information about the properties available on the User object,
+        check out Clerk's{' '}
+        <Link href="https://clerk.dev/docs/reference/clerkjs/user">
+          <a className={common.link}>documentation</a>
+        </Link>
+        .
+      </p>
+      <section className={styles.section}>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.field}>
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="firstName">First name</label>
             <input
               id="firstName"
               name="firstName"
@@ -51,7 +55,7 @@ const UserPage = () => {
             />
           </div>
           <div className={styles.field}>
-            <label htmlFor="lastName">Last Name</label>
+            <label htmlFor="lastName">Last name</label>
             <input
               id="lastName"
               name="lastName"
@@ -59,36 +63,33 @@ const UserPage = () => {
               placeholder={user.lastName || 'Last name'}
             />
           </div>
-        </div>
-        <button className={common.button} type="submit">
-          Submit
-        </button>
-      </form>
-
-      <form onSubmit={handleSubmitImage} className={styles.form}>
-        <div>
-          <h1>Profile image</h1>
-          <p>
-            Your user can upload an image to be used as their profile avatar.
-            Upload an image below.
-          </p>
-        </div>
-        <div className={styles.imageContainer}>
-          <img
-            src={user.profileImageUrl ? user.profileImageUrl : null}
-            className={styles.img}
-          />
-          <div className={styles.field}>
-            <label htmlFor="profileImage">Profile Image</label>
-            <input id="profileImage" name="profileImage" type="file" required />
+          <div className={styles.actions}>
+            <button className={common.button} type="submit">
+              Update name
+            </button>
           </div>
-        </div>
-        <button className={common.button} type="submit">
-          Upload Image
-        </button>
-      </form>
-    </section>
+        </form>
+        <form onSubmit={handleSubmitImage} className={styles.form}>
+          <div className={styles.imageContainer}>
+            <img src={user.profileImageUrl} className={styles.img} />
+            <div className={styles.field}>
+              <input
+                id="profileImage"
+                name="profileImage"
+                type="file"
+                required
+              />
+            </div>
+          </div>
+          <div className={styles.actions}>
+            <button className={common.button} type="submit">
+              Upload image
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
   );
 };
 
-export default UserPage;
+export default UserProfilePage;

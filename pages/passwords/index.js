@@ -85,7 +85,7 @@ const Passwords = () => {
 
   return (
     <div className={common.container}>
-      <h1 className={styles.title}>Passwords</h1>
+      <h1 className={common.title}>Passwords</h1>
       <p>
         One of the most common authentication methods is to use a password. The
         functionality of setting a password on an existing user account can be

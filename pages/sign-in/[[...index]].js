@@ -33,7 +33,7 @@ const SignInPage = () => {
 
     const response = await startMagicLinkFlow({
       emailAddressId,
-      redirectUrl: `${window.location.origin}/home?strategy=${strategy}`
+      redirectUrl: `${window.location.origin}/?strategy=${strategy}`
     });
 
     const verification = response.firstFactorVerification;
@@ -45,7 +45,7 @@ const SignInPage = () => {
     await cancelMagicLinkFlow();
     if (response.status === 'complete') {
       setSession(response.createdSessionId, () =>
-        router.push(`/home?strategy=${strategy}`)
+        router.push(`/?strategy=${strategy}`)
       );
       return;
     }
@@ -66,7 +66,7 @@ const SignInPage = () => {
 
       if (response.status === 'complete') {
         setSession(response.createdSessionId, () =>
-          router.push(`/home?strategy=${strategy}`)
+          router.push(`/?strategy=${strategy}`)
         );
       }
     } catch (err) {
@@ -88,14 +88,14 @@ const SignInPage = () => {
         strategy,
         identifier,
         password: password || undefined,
-        redirect_url: `${window.location.origin}/home?strategy=${strategy}`
+        redirect_url: `${window.location.origin}/?strategy=${strategy}`
       });
 
       setStatus(response.status);
 
       if (response.status === 'complete') {
         setSession(response.createdSessionId, () =>
-          router.push(`/home?strategy=${strategy}`)
+          router.push(`/?strategy=${strategy}`)
         );
       }
 
