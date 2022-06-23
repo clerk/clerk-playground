@@ -30,6 +30,16 @@ const OAuthPage = () => {
     );
   };
 
+  const deleteConnection = async (strategy) => {
+    const accountToDelete = user.externalAccounts.filter(
+      (account) => account.verification.strategy === strategy
+    )[0];
+    const res = await accountToDelete
+      .destroy()
+      .catch((error) => console.log(error));
+    return res;
+  };
+
   getVerifiedConnections();
 
   // Render a button for each supported OAuth provider
@@ -41,34 +51,55 @@ const OAuthPage = () => {
         This page demonstrates how your users can connect their existing account
         to an external OAuth provider.
       </p>
+
       <div className={styles.oauth}>
         <button
           className={common.button}
-          onClick={() => connectAccount('oauth_google')}
+          onClick={() =>
+            !verifiedConnections.includes('oauth_google')
+              ? connectAccount('oauth_google')
+              : deleteConnection('oauth_google')
+          }
         >
-          Connect your Google account
+          {!verifiedConnections.includes('oauth_google')
+            ? 'Connect your Google account'
+            : 'Disconnect your Google account'}
         </button>
         {verifiedConnections.includes('oauth_google') && (
           <p className={styles.p}>Connected!</p>
         )}
       </div>
+
       <div className={styles.oauth}>
         <button
           className={common.button}
-          onClick={() => connectAccount('oauth_github')}
+          onClick={() =>
+            !verifiedConnections.includes('oauth_github')
+              ? connectAccount('oauth_github')
+              : deleteConnection('oauth_github')
+          }
         >
-          Connect your GitHub account
+          {!verifiedConnections.includes('oauth_github')
+            ? 'Connect your GitHub account'
+            : 'Disconnect your GitHub account'}
         </button>
         {verifiedConnections.includes('oauth_github') && (
           <p className={styles.p}>Connected!</p>
         )}
       </div>
+
       <div className={styles.oauth}>
         <button
           className={common.button}
-          onClick={() => connectAccount('oauth_twitter')}
+          onClick={() =>
+            !verifiedConnections.includes('oauth_twitter')
+              ? connectAccount('oauth_twitter')
+              : deleteConnection('oauth_twitter')
+          }
         >
-          Connect your Twitter account
+          {!verifiedConnections.includes('oauth_twitter')
+            ? 'Connect your Twitter account'
+            : 'Disconnect your Twitter account'}
         </button>
         {verifiedConnections.includes('oauth_twitter') && (
           <p className={styles.p}>Connected!</p>
