@@ -1,11 +1,14 @@
 .header {
   display: flex;
-  justify-content: flex-end;
-  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #6455a2;
 }
 
-@media screen and (min-width: 768px) {
-  .header {
-    padding: 1rem 2rem;
-  }
+.logo {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
