@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+}
+
+.nav {
+  flex: 0 0 220px;
+  background-color: #dedde6;
+  padding: 24px 0;
+}
+
+.list {
+  margin: 0;
+  padding: 10px 20px;
+  list-style: none;
+}
+
+.list > li {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.list > li:last-child {
+  margin-bottom: 0;
+}
