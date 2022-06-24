@@ -1,34 +1,19 @@
-.section {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    align-items: center;
+.wrapper {
+  padding-top: 10px;
 }
 
 .oauth {
-    height: 10vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 450px;
+  margin-top: 24px;
 }
 
-.p { 
-    color: hsl(141, 98%, 35%); 
-    font-family: 'Open Sans', sans-serif; font-size: 24px; 
-    font-weight: 500; 
-    line-height: 32px; 
-    margin-left: 10px;
+.p {
+  color: #02b13f;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 0 24px;
 }
-
-.title {
-    margin-bottom: 40px;
-    font-size: 48px;
-    font-weight: 600;
-  }
-
-.description {
-    margin-top: 0.5rem;
-    color: #808080;
-    line-height: 1.4;
-  }
