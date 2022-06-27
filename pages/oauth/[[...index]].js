@@ -1,8 +1,10 @@
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
-import styles from '/styles/OAuth.module.css';
-import common from '/styles/Common.module.css';
 import { useEffect, useState } from 'react';
+
+import { OAUTH_PROVIDERS } from '/utils/constants';
+import common from '/styles/Common.module.css';
+import styles from '/styles/OAuth.module.css';
 
 const OAuthPage = () => {
   const { user } = useUser();
@@ -50,57 +52,37 @@ const OAuthPage = () => {
   // Render a button for each supported OAuth provider
   // you want to add to your app
   return (
-    <div className={styles.section}>
-      <h1 className={styles.title}>OAuth SSO Providers Page</h1>
-      <p className={styles.description}>
-        This page demonstrates how your users can connect their existing account
-        to an external OAuth provider.
+    <div className={common.container}>
+      <h1 className={common.title}>OAuth Social Providers</h1>
+      <p>
+        OAuth (Open Authentication) is an open-standard authorization protocol
+        that delegates authentication to an external identity provider (IdP). A
+        user can use their account from another website (such as Google or
+        Twitter) to sign in to another website without having to re-enter common
+        credentials.
       </p>
-
-      <div className={styles.oauth}>
-        <button
-          className={common.button}
-          onClick={() => toggleAccountConnection('oauth_google')}
-        >
-          {!verifiedConnections.includes('oauth_google')
-            ? 'Connect'
-            : 'Disconnect'}{' '}
-          your Google account
-        </button>
-        {verifiedConnections.includes('oauth_google') && (
-          <p className={styles.p}>Connected!</p>
-        )}
-      </div>
-
-      <div className={styles.oauth}>
-        <button
-          className={common.button}
-          onClick={() => toggleAccountConnection('oauth_github')}
-        >
-          {!verifiedConnections.includes('oauth_github')
-            ? 'Connect'
-            : 'Disconnect'}{' '}
-          your GitHub account
-        </button>
-        {verifiedConnections.includes('oauth_github') && (
-          <p className={styles.p}>Connected!</p>
-        )}
-      </div>
-
-      <div className={styles.oauth}>
-        <button
-          className={common.button}
-          onClick={() => toggleAccountConnection('oauth_twitter')}
-        >
-          {!verifiedConnections.includes('oauth_twitter')
-            ? 'Connect'
-            : 'Disconnect'}{' '}
-          your Twitter account
-        </button>
-        {verifiedConnections.includes('oauth_twitter') && (
-          <p className={styles.p}>Connected!</p>
-        )}
-      </div>
+      <p>
+        This page demonstrates how easily your users can connect their existing
+        account to an external OAuth provider.
+      </p>
+      <section className={styles.wrapper}>
+        {OAUTH_PROVIDERS.map((provider) => (
+          <div key={provider.name} className={styles.oauth}>
+            <button
+              className={common.button}
+              onClick={() => toggleAccountConnection(provider.strategy)}
+            >
+              {!verifiedConnections.includes(provider.strategy)
+                ? 'Connect'
+                : 'Disconnect'}{' '}
+              your {provider.name} account
+            </button>
+            {verifiedConnections.includes(provider.strategy) && (
+              <p className={styles.p}>Connected!</p>
+            )}
+          </div>
+        ))}
+      </section>
     </div>
   );
 };

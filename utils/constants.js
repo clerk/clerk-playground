@@ -39,3 +39,18 @@ export const FEATURE_LINKS = [
     path: '/forgot-password'
   }
 ];
+
+export const OAUTH_PROVIDERS = [
+  {
+    name: 'Google',
+    strategy: 'oauth_google'
+  },
+  {
+    name: 'GitHub',
+    strategy: 'oauth_github'
+  },
+  {
+    name: 'Twitter',
+    strategy: 'oauth_twitter'
+  }
+];

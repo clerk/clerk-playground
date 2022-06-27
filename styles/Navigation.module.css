@@ -4,21 +4,31 @@
 
 .nav {
   flex: 0 0 220px;
-  background-color: #dedde6;
-  padding: 24px 0;
+  background-color: #d8d7e7;
+  padding: 40px 0;
 }
 
 .list {
   margin: 0;
-  padding: 10px 20px;
+  padding: 0;
   list-style: none;
 }
 
-.list > li {
-  margin-bottom: 10px;
-  padding: 5px;
+.list > li:last-child > a {
+  border-bottom: 0;
 }
 
-.list > li:last-child {
-  margin-bottom: 0;
+.link {
+  display: block;
+  padding: 14px 20px;
+  color: #504985;
+  transition: all 0.2s linear;
+  border-bottom: 1px solid #bcbbd6;
+}
+
+.active,
+.link:hover,
+.link:focus {
+  color: #403a6a;
+  background-color: #c2c0d9;
 }
