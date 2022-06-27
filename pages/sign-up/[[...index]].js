@@ -1,11 +1,13 @@
-import { useSignUp } from '@clerk/nextjs';
+import { useSignIn, useSignUp } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 import common from '/styles/Common.module.css';
 import styles from '/styles/SignUp.module.css';
 
 const SignUpPage = () => {
   const { signUp } = useSignUp();
+  const { signIn } = useSignIn();
   const router = useRouter();
 
   const handleSubmit = async (event) => {
@@ -18,6 +20,12 @@ const SignUpPage = () => {
 
     router.push('/verify');
   };
+
+  useEffect(() => {
+    if (signIn && signIn.status === 'needs_second_factor') {
+      router.push('/sign-in/mfa');
+    }
+  }, [signIn]);
 
   return (
     <div className={common.container}>
