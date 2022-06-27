@@ -33,5 +33,9 @@ export const FEATURE_LINKS = [
   {
     name: 'User Profile',
     path: '/user-profile'
+  },
+  {
+    name: 'Forgot Password Flow',
+    path: '/forgot-password'
   }
 ];
