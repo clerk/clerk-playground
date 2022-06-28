@@ -20,7 +20,7 @@ const ResetPasswordPage = () => {
         const response = await user.update({ password: password });
         if (response) {
           console.log('response', response);
-          router.push('/');
+          router.push('/?strategy=forgot_password');
         }
       } catch (err) {
         console.error('error', err);

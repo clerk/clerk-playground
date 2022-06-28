@@ -36,6 +36,8 @@ export const FEATURE_LINKS = [
   },
   {
     name: 'Forgot Password Flow',
+    label: 'Forgot Password',
+    strategy: 'forgot_password',
     path: '/forgot-password'
   }
 ];
