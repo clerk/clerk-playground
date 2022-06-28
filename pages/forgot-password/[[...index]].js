@@ -50,7 +50,9 @@ const ForgotPasswordPage = () => {
             id="emailAddress"
             name="email"
             type="email"
-            defaultValue={user.emailAddresses || 'you@company.com'}
+            defaultValue={
+              user.primaryEmailAddress.emailAddress || 'you@company.com'
+            }
             required
           />
         </div>
