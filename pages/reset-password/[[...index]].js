@@ -1,11 +1,13 @@
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import common from '/styles/Common.module.css';
 import styles from '/styles/SignIn.module.css';
 
 const ResetPasswordPage = () => {
   const router = useRouter();
   const { user } = useUser();
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +26,7 @@ const ResetPasswordPage = () => {
         console.error('error', err);
       }
     } else {
-      console.log('Passwords must match');
+      setMessage('Passwords must match');
     }
   };
 
@@ -50,6 +52,7 @@ const ResetPasswordPage = () => {
           Save password
         </button>
       </form>
+      {message && <p className={styles.message}>{message}</p>}
     </div>
   );
 };

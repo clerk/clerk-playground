@@ -50,11 +50,11 @@ const ForgotPasswordPage = () => {
             id="emailAddress"
             name="email"
             type="email"
-            placeholder="you@company.com"
+            placeholder={user.emailAddresses || 'you@company.com'}
             required
           />
         </div>
-        <p>{message}</p>
+        {message && <p className={styles.message}>{message}</p>}
         <button className={common.button} type="submit">
           {getButtonText()}
         </button>
