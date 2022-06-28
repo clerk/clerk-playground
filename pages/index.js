@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut, useUser } from '@clerk/nextjs';
+import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import React from 'react';
