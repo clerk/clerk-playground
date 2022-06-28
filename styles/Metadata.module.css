@@ -36,24 +36,13 @@
   width: 40vw;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 18px;
-}
-
-.table > tbody, .table > td {
-  border: solid 1px black;
-  color: #333;
   text-align: center;
 }
 
-table > .th, .table > thead {
+.table > tbody {
   border: solid 1px black;
-  text-align: center;
-
-}
-
-.text {
-  width: 60vw;
 }
 
 .form {
-  margin-top: 20px;
+  margin-top: 4vh;
 }
