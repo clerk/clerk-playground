@@ -39,6 +39,10 @@ export const FEATURE_LINKS = [
     label: 'Forgot Password',
     strategy: 'forgot_password',
     path: '/forgot-password'
+  },
+  {
+    name: 'Metadata',
+    path: '/metadata'
   }
 ];
 

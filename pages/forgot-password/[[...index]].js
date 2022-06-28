@@ -6,9 +6,6 @@ import styles from '/styles/SignIn.module.css';
 const ForgotPasswordPage = () => {
   const { user } = useUser();
   const [message, setMessage] = useState('');
-  const getButtonText = () => {
-    return !message ? 'Continue' : 'Resend Link';
-  };
 
   const handleSubmit = async (event) => {
     const formData = new FormData(event.target);
@@ -46,19 +43,11 @@ const ForgotPasswordPage = () => {
       <form onSubmit={handleSubmit}>
         <div className={styles.field}>
           <label htmlFor="emailAddress">Email address</label>
-          <input
-            id="emailAddress"
-            name="email"
-            type="email"
-            defaultValue={
-              user.primaryEmailAddress.emailAddress || 'you@company.com'
-            }
-            required
-          />
+          <input id="emailAddress" name="email" type="email" required />
         </div>
         {message && <p className={styles.message}>{message}</p>}
         <button className={common.button} type="submit">
-          {getButtonText()}
+          {!message ? 'Continue' : 'Resend Link'}
         </button>
       </form>
     </div>
