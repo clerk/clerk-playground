@@ -50,7 +50,7 @@ const ForgotPasswordPage = () => {
             id="emailAddress"
             name="email"
             type="email"
-            placeholder={user.emailAddresses || 'you@company.com'}
+            defaultValue={user.emailAddresses || 'you@company.com'}
             required
           />
         </div>
