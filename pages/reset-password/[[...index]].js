@@ -19,7 +19,6 @@ const ResetPasswordPage = () => {
       try {
         const response = await user.update({ password: password });
         if (response) {
-          console.log('response', response);
           router.push('/?strategy=forgot_password');
         }
       } catch (err) {
@@ -32,7 +31,7 @@ const ResetPasswordPage = () => {
 
   return (
     <div className={common.container}>
-      <h1>Reset Password</h1>
+      <h1 className={common.title}>Reset Password</h1>
       <p>Enter your new password</p>
       <form onSubmit={handleSubmit}>
         <div className={styles.field}>

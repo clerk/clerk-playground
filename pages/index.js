@@ -12,8 +12,6 @@ const Home = () => {
   const strategy = query?.strategy || 'email_link';
   const link = FEATURE_LINKS.find((f) => f.strategy === strategy);
 
-  console.log('user', user);
-
   return (
     <div className={common.container}>
       <h1 className={common.title}>

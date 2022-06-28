@@ -37,7 +37,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className={common.container}>
-      <h1>Forgot Password</h1>
+      <h1 className={common.title}>Forgot Password</h1>
       <p>Want to see a custom "Forgot password" user flow?</p>
       <p>
         Enter your email below to receive a magic link, which will route you to
