@@ -10,9 +10,8 @@ const Home = () => {
   const { user } = useUser();
   const { query } = useRouter();
   const strategy = query?.strategy || 'email_link';
+  const mfa = Boolean(query?.mfa);
   const link = FEATURE_LINKS.find((f) => f.strategy === strategy);
-
-  console.log('user', user);
 
   return (
     <div className={common.container}>
@@ -24,6 +23,15 @@ const Home = () => {
         <Link href={link.path}>
           <a className={common.link}>{link.label}</a>
         </Link>
+        {mfa ? (
+          <span>
+            {' '}
+            and{' '}
+            <Link href="/mfa">
+              <a className={common.link}>Multifactor Auth</a>
+            </Link>
+          </span>
+        ) : null}
         .
       </p>
       <p>← Choose another feature of Clerk to explore.</p>

@@ -54,3 +54,27 @@
   border-color: #a9a9a9;
   cursor: not-allowed;
 }
+
+.secondaryButton {
+  padding: 8px 16px;
+  background-color: #fff;
+  border: 1px solid #bebebe;
+  border-radius: 4px;
+  color: #6455a2;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.secondaryButton:hover,
+.secondaryButton:focus {
+  background-color: #e9e9e9;
+}
+
+.secondaryButton[disabled] {
+  opacity: 0.8;
+  background-color: #e9e9e9;
+  cursor: not-allowed;
+}

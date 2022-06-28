@@ -21,6 +21,7 @@ import Layout from '/components/Layout';
  */
 const publicPages = [
   '/sign-in/[[...index]]',
+  '/sign-in/mfa',
   '/sign-up/[[...index]]',
   '/verify'
 ];

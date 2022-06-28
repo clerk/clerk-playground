@@ -23,6 +23,20 @@ const SignInPage = () => {
     return 'Sign in';
   };
 
+  const signInWithSecondFactor = async (strategy, formData) => {
+    const code = formData.get('mobileCode');
+    const response = await signIn.attemptSecondFactor({
+      strategy: 'phone_code',
+      code
+    });
+
+    if (response.status === 'complete') {
+      setSession(response.createdSessionId, () =>
+        router.push(`/?strategy=${strategy}&mfa=true`)
+      );
+    }
+  };
+
   const signInWithLink = async (strategy, status, formData) => {
     const firstFactor = signIn.supportedFirstFactors.find(
       (f) => f.strategy === strategy
@@ -47,7 +61,6 @@ const SignInPage = () => {
       setSession(response.createdSessionId, () =>
         router.push(`/?strategy=${strategy}`)
       );
-      return;
     }
   };
 
@@ -68,6 +81,12 @@ const SignInPage = () => {
         setSession(response.createdSessionId, () =>
           router.push(`/?strategy=${strategy}`)
         );
+      } else if (response.status === 'needs_second_factor') {
+        await response.prepareSecondFactor({
+          strategy: 'phone_code'
+        });
+
+        setStatus(response.status);
       }
     } catch (err) {
       console.error(err);
@@ -97,9 +116,17 @@ const SignInPage = () => {
         setSession(response.createdSessionId, () =>
           router.push(`/?strategy=${strategy}`)
         );
+      } else if (response.status === 'needs_second_factor') {
+        await response.prepareSecondFactor({
+          strategy: 'phone_code'
+        });
       }
 
       return;
+    }
+
+    if (status === 'needs_second_factor') {
+      return signInWithSecondFactor(strategy, formData);
     }
 
     // Attempt sign in with applicable strategy
@@ -191,6 +218,23 @@ const SignInPage = () => {
               required
             />
           </div>
+        ) : null}
+        {status === 'needs_second_factor' ? (
+          <>
+            <div className={styles.field}>
+              <label>Verfication code</label>
+              <input
+                type="text"
+                name="mobileCode"
+                placeholder="Code from mobile"
+                required
+              />
+            </div>
+            <div className={styles.message}>
+              Check your mobile device for an SMS code. It will expire in 10
+              minutes.
+            </div>
+          </>
         ) : null}
         {strategy === 'email_link' && status === 'needs_first_factor' ? (
           <div className={styles.message}>

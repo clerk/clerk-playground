@@ -6,7 +6,7 @@ import common from '/styles/Common.module.css';
 import styles from '/styles/Navigation.module.css';
 
 const Navigation = () => {
-  const { asPath } = useRouter();
+  const router = useRouter();
 
   return (
     <nav className={styles.nav}>
@@ -16,7 +16,7 @@ const Navigation = () => {
             <Link href={feature.path}>
               <a
                 className={`${styles.link} ${
-                  asPath === feature.path ? styles.active : ''
+                  router.pathname === feature.path ? styles.active : ''
                 }`}
               >
                 {feature.name}
