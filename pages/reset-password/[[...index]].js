@@ -15,7 +15,7 @@ const ResetPasswordPage = () => {
     const match = password == confirmation;
     if (match) {
       try {
-        const response = await user.update({ password: password1 });
+        const response = await user.update({ password: password });
         if (response) {
           console.log('response', response);
           router.push('/');
