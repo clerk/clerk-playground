@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import common from '/styles/Common.module.css';
-import styles from '/styles/SignIn.module.css';
+import styles from '/styles/Form.module.css';
 
 const SignInPage = () => {
   const { signIn, setSession } = useSignIn();

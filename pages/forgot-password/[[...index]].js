@@ -1,13 +1,14 @@
 import { useUser } from '@clerk/nextjs';
 import { useState } from 'react';
+
 import common from '/styles/Common.module.css';
-import styles from '/styles/SignIn.module.css';
+import styles from '/styles/Form.module.css';
 
 const ForgotPasswordPage = () => {
   const { user } = useUser();
   const [message, setMessage] = useState('');
   const getButtonText = () => {
-    return !message ? 'Continue' : 'Resend Link';
+    return !message ? 'Send Magic Link' : 'Resend Link';
   };
 
   const handleSubmit = async (event) => {

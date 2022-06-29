@@ -2,7 +2,7 @@ import { useSignIn, useUser } from '@clerk/nextjs';
 import { useEffect, useRef, useState } from 'react';
 
 import common from '/styles/Common.module.css';
-import styles from '/styles/OTP.module.css';
+import styles from '/styles/Form.module.css';
 
 const OneTimePasscodes = () => {
   const { user } = useUser();
@@ -162,7 +162,7 @@ const OneTimePasscodes = () => {
         Try adding either a secondary email address (different from the primary
         one you signed up with) or your phone number.
       </p>
-      <section className={styles.wrapper}>
+      <section className={styles.row}>
         <form
           ref={emailFormRef}
           className={styles.form}

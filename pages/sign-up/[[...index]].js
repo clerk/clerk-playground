@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import common from '/styles/Common.module.css';
-import styles from '/styles/SignUp.module.css';
+import styles from '/styles/Form.module.css';
 
 const SignUpPage = () => {
   const { signUp } = useSignUp();

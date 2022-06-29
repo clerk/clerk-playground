@@ -1,8 +1,8 @@
-.wrapper {
+.row {
   display: flex;
 }
 
-.wrapper > form {
+.row > form {
   flex: 1 0 50%;
 }
 
@@ -11,7 +11,7 @@
 }
 
 .field {
-  margin: 24px 0;
+  margin: 24px 0 16px;
 }
 
 .field > label,
@@ -22,7 +22,7 @@
 
 .field > label {
   display: inline-block;
-  width: 200px;
+  min-width: 150px;
   margin-right: 16px;
   font-weight: 600;
 }
@@ -37,13 +37,23 @@
   outline: 0;
 }
 
-.message {
+.message,
+.warning {
   margin: 24px 0;
-  width: 355px;
+  min-width: 355px;
+  max-width: 500px;
   min-height: 36px;
   opacity: 1;
   background-color: rgb(167, 255, 177, 0.5);
   border-radius: 2px;
   padding: 8px 16px;
   transition: all 0.6s ease;
+}
+
+.warning {
+  background-color: rgba(253, 244, 120, 0.5);
+}
+
+.actions > button + button {
+  margin-left: 16px;
 }
