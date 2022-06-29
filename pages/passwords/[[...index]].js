@@ -89,7 +89,11 @@ const Passwords = () => {
       <p>
         One of the most common authentication methods is to use a password. The
         functionality of setting a password on an existing user account can be
-        used to build a Forgot Password flow.
+        used to build a{' '}
+        <Link href="/forgot-password">
+          <a className={common.link}>Forgot Password flow</a>
+        </Link>
+        .
       </p>
       <p>
         The only requirement enforced by Clerk is that the chosen password must

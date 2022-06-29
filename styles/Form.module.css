@@ -1,9 +1,17 @@
+.row {
+  display: flex;
+}
+
+.row > form {
+  flex: 1 0 50%;
+}
+
 .form {
   padding-top: 4px;
 }
 
 .field {
-  margin: 24px 0;
+  margin: 24px 0 16px;
 }
 
 .field > label,
@@ -14,7 +22,7 @@
 
 .field > label {
   display: inline-block;
-  width: 150px;
+  min-width: 150px;
   margin-right: 16px;
   font-weight: 600;
 }
@@ -32,7 +40,8 @@
 .message,
 .warning {
   margin: 24px 0;
-  width: 355px;
+  min-width: 355px;
+  max-width: 500px;
   min-height: 36px;
   opacity: 1;
   background-color: rgb(167, 255, 177, 0.5);

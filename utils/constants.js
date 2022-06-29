@@ -31,11 +31,7 @@ export const FEATURE_LINKS = [
     path: '/mfa'
   },
   {
-    name: 'User Profile',
-    path: '/user-profile'
-  },
-  {
-    name: 'Forgot Password Flow',
+    name: 'Forgot Password',
     label: 'Forgot Password',
     strategy: 'forgot_password',
     path: '/forgot-password'
@@ -43,6 +39,10 @@ export const FEATURE_LINKS = [
   {
     name: 'Metadata',
     path: '/metadata'
+  },
+  {
+    name: 'User Profile',
+    path: '/user-profile'
   }
 ];
 

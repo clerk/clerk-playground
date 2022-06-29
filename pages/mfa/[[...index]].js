@@ -2,7 +2,7 @@ import { useUser } from '@clerk/nextjs';
 import { useEffect, useState } from 'react';
 
 import common from '/styles/Common.module.css';
-import styles from '/styles/Multifactor.module.css';
+import styles from '/styles/Form.module.css';
 
 const MultiFactorAuth = () => {
   const { user } = useUser();
