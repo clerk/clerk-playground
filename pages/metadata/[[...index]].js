@@ -15,7 +15,7 @@ const MetadataPage = () => {
 
   const handleSubmit = async (event) => {
     const formData = new FormData(event.target);
-    const date = formData.get('birthday');
+    const date = formData.get('birthday').replace(/\-/g, '/');
     const birthday = new Date(date).toLocaleDateString('en-US', {
       dateStyle: 'long'
     });
