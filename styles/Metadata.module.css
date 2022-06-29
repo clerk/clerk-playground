@@ -1,0 +1,48 @@
+.field {
+  margin: 24px 0 16px;
+}
+
+.field > label,
+.field > input {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+}
+
+.field > label {
+  display: inline-block;
+  min-width: 150px;
+  margin-right: 16px;
+  font-weight: 600;
+}
+
+.field > input {
+  padding: 2px 6px;
+}
+
+.message {
+  margin: 24px 0;
+  width: 500px;
+  min-height: 36px;
+  opacity: 1;
+  background-color: rgb(167, 255, 177, 0.5);
+  border-radius: 2px;
+  padding: 8px 16px;
+  transition: all 0.6s ease;
+}
+
+.table {
+  border: solid 1px black;
+  border-collapse: collapse;
+  width: 40vw;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  text-align: center;
+}
+
+.table > tbody {
+  border: solid 1px black;
+}
+
+.form {
+  margin-top: 4vh;
+}

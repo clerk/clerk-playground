@@ -37,6 +37,10 @@ export const FEATURE_LINKS = [
     path: '/forgot-password'
   },
   {
+    name: 'Metadata',
+    path: '/metadata'
+  },
+  {
     name: 'User Profile',
     path: '/user-profile'
   }
