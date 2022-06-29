@@ -1,15 +1,24 @@
 import { useUser } from '@clerk/nextjs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import common from '/styles/Common.module.css';
 import styles from '/styles/Metadata.module.css';
 
-const MetaDataPage = () => {
+const MetadataPage = () => {
   const { user } = useUser();
-  const [message, setMessage] = useState('');
+  const [birthday, setBirthday] = useState('');
+
+  useEffect(() => {
+    if (user.unsafeMetadata.birthday) {
+      setBirthday(user.unsafeMetadata.birthday);
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     const formData = new FormData(event.target);
-    const birthday = formData.get('birthday');
+    const date = formData.get('birthday');
+    const birthday = new Date(date).toLocaleDateString('en-US', {
+      dateStyle: 'long'
+    });
     event.preventDefault();
 
     try {
@@ -17,7 +26,7 @@ const MetaDataPage = () => {
         unsafeMetadata: { birthday: birthday }
       });
       if (response) {
-        setMessage(response.unsafeMetadata.birthday);
+        setBirthday(response.unsafeMetadata.birthday);
       }
     } catch (err) {
       console.error('error', err);
@@ -36,18 +45,26 @@ const MetaDataPage = () => {
         access.{' '}
       </p>
       <p>
-        Will the custom attributes contain sensitive information that should not
-        be displayed on the front-end? Use the <b>privateMetadata</b> property.{' '}
+        Do the custom attributes contain sensitive information that should not
+        be displayed on the front-end?
+      </p>
+      <p>
+        {' '}
+        Use the <b>privateMetadata</b> property.{' '}
       </p>
       <p>
         Do you need to set some metadata from your back-end and have them
-        displayed as read-only on the front-end? Use the <b>publicMetadata</b>{' '}
-        property.{' '}
+        displayed as read-only on the front-end?{' '}
+      </p>
+      <p>
+        Use the <b>publicMetadata</b> property.{' '}
       </p>
       <p>
         Do you need to set the custom attributes from the front-end (using our
-        ClerkJS library or the Frontend API)? You should choose the{' '}
-        <b>unsafeMetadata</b> property.{' '}
+        ClerkJS library or the Frontend API)?{' '}
+      </p>
+      <p>
+        Use the <b>unsafeMetadata</b> property.{' '}
       </p>
       <table className={styles.table}>
         <thead>
@@ -82,10 +99,16 @@ const MetaDataPage = () => {
         </p>
         <div className={styles.field}>
           <label htmlFor="birthday">Birthday</label>
-          <input id="birthday" name="birthday" type="date" required />
+          <input
+            id="birthday"
+            name="birthday"
+            type="date"
+            required
+            defaultValue={birthday || null}
+          />
         </div>
-        {message && (
-          <p className={styles.message}>Your birthday is {message}!</p>
+        {birthday && (
+          <p className={styles.message}>Your birthday is {birthday}!</p>
         )}
         <button className={common.button} type="submit">
           Submit
@@ -95,4 +118,4 @@ const MetaDataPage = () => {
   );
 };
 
-export default MetaDataPage;
+export default MetadataPage;
