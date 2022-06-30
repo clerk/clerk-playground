@@ -39,7 +39,9 @@ const UserProfilePage = () => {
         For more information about the properties available on the User object,
         check out Clerk's{' '}
         <Link href="https://clerk.dev/docs/reference/clerkjs/user">
-          <a className={common.link}>documentation</a>
+          <a className={common.link} target="_blank">
+            documentation
+          </a>
         </Link>
         .
       </p>

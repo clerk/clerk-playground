@@ -11,7 +11,7 @@ export const FEATURE_LINKS = [
     path: '/passwords'
   },
   {
-    name: 'One-Time Passcodes',
+    name: 'One-Time Passcodes (OTP)',
     label: 'One-Time Passcode',
     strategy: 'email_code',
     path: '/otp'

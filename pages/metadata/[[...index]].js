@@ -1,5 +1,6 @@
 import { useUser } from '@clerk/nextjs';
 import { useState, useEffect } from 'react';
+
 import common from '/styles/Common.module.css';
 import styles from '/styles/Metadata.module.css';
 
@@ -15,15 +16,13 @@ const MetadataPage = () => {
 
   const handleSubmit = async (event) => {
     const formData = new FormData(event.target);
-    const date = formData.get('birthday').replace(/\-/g, '/');
-    const birthday = new Date(date).toLocaleDateString('en-US', {
-      dateStyle: 'long'
-    });
+    const birthday = formData.get('birthday');
+
     event.preventDefault();
 
     try {
       const response = await user.update({
-        unsafeMetadata: { birthday: birthday }
+        unsafeMetadata: { birthday }
       });
       if (response) {
         setBirthday(response.unsafeMetadata.birthday);
@@ -104,11 +103,17 @@ const MetadataPage = () => {
             name="birthday"
             type="date"
             required
-            defaultValue={birthday || null}
+            defaultValue={birthday || ''}
           />
         </div>
         {birthday && (
-          <p className={styles.message}>Your birthday is {birthday}!</p>
+          <p className={styles.message}>
+            Your birthday is{' '}
+            {new Date(birthday).toLocaleDateString('en-US', {
+              dateStyle: 'long'
+            })}
+            !
+          </p>
         )}
         <button className={common.button} type="submit">
           Submit

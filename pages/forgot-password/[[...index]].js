@@ -7,6 +7,7 @@ import styles from '/styles/Form.module.css';
 const ForgotPasswordPage = () => {
   const { user } = useUser();
   const [message, setMessage] = useState('');
+  const primaryEmail = user.primaryEmailAddress?.emailAddress;
 
   const handleSubmit = async (event) => {
     const formData = new FormData(event.target);
@@ -41,14 +42,20 @@ const ForgotPasswordPage = () => {
         Enter your email below to receive a magic link, which will route you to
         page that will allow you reset your password.
       </p>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.field}>
           <label htmlFor="emailAddress">Email address</label>
-          <input id="emailAddress" name="email" type="email" required />
+          <input
+            id="emailAddress"
+            name="email"
+            type="email"
+            defaultValue={primaryEmail}
+            required
+          />
         </div>
         {message && <p className={styles.message}>{message}</p>}
         <button className={common.button} type="submit">
-          {!message ? 'Continue' : 'Resend Link'}
+          {!message ? 'Send password reset link' : 'Resend link'}
         </button>
       </form>
     </div>
