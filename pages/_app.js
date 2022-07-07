@@ -22,6 +22,7 @@ const publicPages = [
   '/sign-in/[[...index]]',
   '/sign-in/mfa',
   '/sign-up/[[...index]]',
+  '/sso-callback',
   '/verify'
 ];
 

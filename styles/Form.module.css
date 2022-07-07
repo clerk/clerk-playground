@@ -58,6 +58,10 @@
   background-color: rgba(253, 244, 120, 0.5);
 }
 
+.actions {
+  padding-top: 15px;
+}
+
 .actions > button + button {
   margin-left: 16px;
 }

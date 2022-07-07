@@ -17,7 +17,7 @@ export const FLOW_LINKS = [
   {
     name: 'Sign up with social',
     strategy: 'oauth',
-    path: '#'
+    path: '/sign-up/social'
   }
 ];
 
@@ -47,6 +47,8 @@ export const FEATURE_LINKS = [
   },
   {
     name: 'OAuth Social Providers',
+    label: 'OAuth Social Provider',
+    strategy: 'oauth',
     path: '/oauth'
   },
   {
