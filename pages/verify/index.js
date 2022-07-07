@@ -1,11 +1,13 @@
 import { useClerk, useSignUp } from '@clerk/nextjs';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import common from '/styles/Common.module.css';
 
 const VerificationPage = () => {
   const [sent, setSent] = useState(false);
-  const { signUp } = useSignUp();
+  const { signUp, setSession } = useSignUp();
+  const router = useRouter();
   const sendMagicLink = async () => {
     const { startMagicLinkFlow } = signUp.createMagicLinkFlow();
 
@@ -15,9 +17,14 @@ const VerificationPage = () => {
       setSent(false);
     }, 10000);
 
-    await startMagicLinkFlow({
+    const response = await startMagicLinkFlow({
       redirectUrl: `${window.location.origin}/`
     });
+
+    if (response.status === 'complete') {
+      setSession(su.createdSessionId, () => router.push('/'));
+      return;
+    }
   };
 
   useEffect(() => {
