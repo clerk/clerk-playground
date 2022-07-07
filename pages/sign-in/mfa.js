@@ -44,7 +44,7 @@ const SignInMultifactorPage = () => {
 
   return (
     <div className={common.container}>
-      <h1>Welcome back to Clerk Playground!</h1>
+      <h1 className={common.title}>Welcome back to Clerk Playground!</h1>
       <p>It appears your account has multifactor authentication enabled.</p>
       <p>Enter the verification code sent to your mobile device below.</p>
       <form onSubmit={handleSubmit}>

@@ -29,7 +29,7 @@ const SignUpPage = () => {
 
   return (
     <div className={common.container}>
-      <h1>Welcome to the Clerk Playground!</h1>
+      <h1 className={common.title}>Welcome to the Clerk Playground!</h1>
       <p>
         This app will demonstrate some of the features of Clerk and different
         combinations that can be used to build authentication and user

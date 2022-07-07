@@ -141,7 +141,7 @@ const SignInPage = () => {
 
   return (
     <div className={common.container}>
-      <h1>Welcome back to Clerk Playground!</h1>
+      <h1 className={common.title}>Welcome back to Clerk Playground!</h1>
       <p>Been here before? Sign in using the form below.</p>
       <p>
         If it's your first time, you'll want to{' '}

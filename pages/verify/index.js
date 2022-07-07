@@ -33,7 +33,7 @@ const VerificationPage = () => {
 
   return (
     <div className={common.container}>
-      <h1>Welcome to the Clerk Playground!</h1>
+      <h1 className={common.title}>Welcome to the Clerk Playground!</h1>
       <p>
         Check your email inbox for a sign in link. It will expire in 10 minutes.
       </p>
