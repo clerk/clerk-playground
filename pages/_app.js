@@ -40,7 +40,8 @@ const MyApp = ({ Component, pageProps }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Layout>
-        {publicPages.includes(router.pathname) ? (
+        {publicPages.includes(router.pathname) ||
+        router.pathname.startsWith('/sign') ? (
           <Component {...pageProps} />
         ) : (
           <>
