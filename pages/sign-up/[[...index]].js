@@ -1,6 +1,7 @@
 import { useSignIn, useSignUp } from '@clerk/nextjs';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import common from '/styles/Common.module.css';
 import styles from '/styles/Form.module.css';
@@ -9,16 +10,26 @@ const SignUpPage = () => {
   const { signUp } = useSignUp();
   const { signIn } = useSignIn();
   const router = useRouter();
+  const [status, setStatus] = useState('');
 
+  const handleError = (err) => console.error(err);
   const handleSubmit = async (event) => {
     const formData = new FormData(event.target);
     const emailAddress = formData.get('email');
 
     event.preventDefault();
 
-    await signUp.create({ emailAddress });
+    try {
+      await signUp.create({ emailAddress });
 
-    router.push('/verify');
+      router.push('/verify');
+    } catch (err) {
+      if (err?.errors?.[0]?.code === 'form_identifier_exists') {
+        setStatus('error');
+      } else {
+        handleError(err);
+      }
+    }
   };
 
   useEffect(() => {
@@ -62,6 +73,15 @@ const SignUpPage = () => {
           Let's play
         </button>
       </form>
+      {status === 'error' && (
+        <div className={styles.warning}>
+          You've already signed up.{' '}
+          <Link href="/sign-in">
+            <a className={common.link}>Sign in</a>
+          </Link>{' '}
+          instead.
+        </div>
+      )}
     </div>
   );
 };

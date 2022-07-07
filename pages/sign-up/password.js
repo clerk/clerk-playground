@@ -10,6 +10,7 @@ const PasswordSignUp = () => {
   const [simplePassword, setSimplePassword] = useState('');
   const [complexPassword, setComplexPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
   const [invalid, setInvalid] = useState(true);
   const [email, setEmail] = useState('');
   const { signUp, setSession } = useSignUp();
@@ -67,7 +68,11 @@ const PasswordSignUp = () => {
       setSimplePassword('');
       setComplexPassword('');
     } catch (err) {
-      handleError(err);
+      if (err?.errors?.[0]?.code === 'form_identifier_exists') {
+        setStatus('error');
+      } else {
+        handleError(err);
+      }
     }
   };
   const handleVerification = async (event) => {
@@ -215,6 +220,15 @@ const PasswordSignUp = () => {
         </form>
       )}
       <div className={styles.message}>{message}</div>
+      {status === 'error' && (
+        <div className={styles.warning}>
+          You've already signed up.{' '}
+          <Link href="/sign-in">
+            <a className={common.link}>Sign in</a>
+          </Link>{' '}
+          instead.
+        </div>
+      )}
     </div>
   );
 };

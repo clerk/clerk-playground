@@ -1,4 +1,5 @@
 import { useSignUp } from '@clerk/nextjs';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -47,7 +48,11 @@ const PasscodeSignUp = () => {
 
       await signUp.prepareEmailAddressVerification();
     } catch (err) {
-      handleError(err);
+      if (err?.errors?.[0]?.code === 'form_identifier_exists') {
+        setStatus('error');
+      } else {
+        handleError(err);
+      }
     }
   };
 
@@ -80,6 +85,15 @@ const PasscodeSignUp = () => {
               Check your email inbox for one-time verification code
             </div>
           </>
+        ) : null}
+        {status === 'error' ? (
+          <div className={styles.warning}>
+            You've already signed up.{' '}
+            <Link href="/sign-in">
+              <a className={common.link}>Sign in</a>
+            </Link>{' '}
+            instead.
+          </div>
         ) : null}
         {status !== 'verified' ? (
           <button className={common.button} type="submit">
