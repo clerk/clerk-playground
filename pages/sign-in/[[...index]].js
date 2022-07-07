@@ -13,6 +13,7 @@ const SignInPage = () => {
   const [strategy, setStrategy] = useState('');
   const [status, setStatus] = useState('');
   const [notification, setNotification] = useState(null);
+  const handleError = (err) => console.error(err);
 
   const getButtonText = () => {
     if (!status && strategy !== 'password') {
@@ -107,24 +108,32 @@ const SignInPage = () => {
     event.preventDefault();
 
     if (!status) {
-      // Prepare sign in with strategy and identifier
-      const response = await signIn.create({
-        strategy,
-        identifier,
-        password: password || undefined,
-        redirect_url: `${window.location.origin}/?strategy=${strategy}`
-      });
-
-      setStatus(response.status);
-
-      if (response.status === 'complete') {
-        setSession(response.createdSessionId, () =>
-          router.push(`/?strategy=${strategy}`)
-        );
-      } else if (response.status === 'needs_second_factor') {
-        await response.prepareSecondFactor({
-          strategy: 'phone_code'
+      try {
+        // Prepare sign in with strategy and identifier
+        const response = await signIn.create({
+          strategy,
+          identifier,
+          password: password || undefined,
+          redirect_url: `${window.location.origin}/?strategy=${strategy}`
         });
+
+        setStatus(response.status);
+
+        if (response.status === 'complete') {
+          setSession(response.createdSessionId, () =>
+            router.push(`/?strategy=${strategy}`)
+          );
+        } else if (response.status === 'needs_second_factor') {
+          await response.prepareSecondFactor({
+            strategy: 'phone_code'
+          });
+        }
+      } catch (err) {
+        if (err?.errors?.[0]?.code === 'form_identifier_not_found') {
+          setStatus('error');
+        } else {
+          handleError(err);
+        }
       }
 
       return;
@@ -157,16 +166,24 @@ const SignInPage = () => {
       });
       form.current.email.focus();
     } else {
-      await signIn.create({
-        identifier,
-        redirect_url: `${window.location.origin}${redirectPath}`
-      });
+      try {
+        await signIn.create({
+          identifier,
+          redirect_url: `${window.location.origin}${redirectPath}`
+        });
 
-      setNotification({
-        type: 'message',
-        text: 'Password reset link has been sent to your email'
-      });
-      signInWithLink(strategy, redirectPath);
+        setNotification({
+          type: 'message',
+          text: 'Password reset link has been sent to your email'
+        });
+        signInWithLink(strategy, redirectPath);
+      } catch (err) {
+        if (err?.errors?.[0]?.code === 'form_identifier_not_found') {
+          setStatus('error');
+        } else {
+          handleError(err);
+        }
+      }
     }
   };
 
@@ -287,6 +304,15 @@ const SignInPage = () => {
       {notification ? (
         <div className={styles[notification.type]}>{notification.text}</div>
       ) : null}
+      {status === 'error' && (
+        <div className={styles.warning}>
+          User account not found.{' '}
+          <Link href="/sign-up">
+            <a className={common.link}>Sign up</a>
+          </Link>{' '}
+          first.
+        </div>
+      )}
     </div>
   );
 };
