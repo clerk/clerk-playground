@@ -1,18 +1,21 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FEATURE_LINKS } from '/utils/constants';
 
 import common from '/styles/Common.module.css';
 import styles from '/styles/Navigation.module.css';
 
-const Navigation = () => {
+const Navigation = ({ links }) => {
   const { asPath } = useRouter();
   const activePath = asPath.replace(/[?#].*/, '');
+
+  if (asPath.startsWith('/sign-in')) {
+    return null;
+  }
 
   return (
     <nav className={styles.nav}>
       <ul className={styles.list}>
-        {FEATURE_LINKS.map((feature) => (
+        {links.map((feature) => (
           <li key={feature.name}>
             <Link href={feature.path}>
               <a

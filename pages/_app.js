@@ -22,6 +22,7 @@ const publicPages = [
   '/sign-in/[[...index]]',
   '/sign-in/mfa',
   '/sign-up/[[...index]]',
+  '/sso-callback',
   '/verify'
 ];
 
@@ -40,7 +41,8 @@ const MyApp = ({ Component, pageProps }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Layout>
-        {publicPages.includes(router.pathname) ? (
+        {publicPages.includes(router.pathname) ||
+        router.pathname.startsWith('/sign') ? (
           <Component {...pageProps} />
         ) : (
           <>

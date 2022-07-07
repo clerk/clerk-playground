@@ -1,3 +1,26 @@
+export const FLOW_LINKS = [
+  {
+    name: 'Sign up with magic link',
+    strategy: 'email_link',
+    path: '/sign-up'
+  },
+  {
+    name: 'Sign up with password',
+    strategy: 'password',
+    path: '/sign-up/password'
+  },
+  {
+    name: 'Sign up with passcode',
+    strategy: 'email_code',
+    path: '/sign-up/passcode'
+  },
+  {
+    name: 'Sign up with social',
+    strategy: 'oauth',
+    path: '/sign-up/social'
+  }
+];
+
 export const FEATURE_LINKS = [
   {
     name: 'Home',
@@ -24,6 +47,8 @@ export const FEATURE_LINKS = [
   },
   {
     name: 'OAuth Social Providers',
+    label: 'OAuth Social Provider',
+    strategy: 'oauth',
     path: '/oauth'
   },
   {
@@ -31,10 +56,10 @@ export const FEATURE_LINKS = [
     path: '/mfa'
   },
   {
-    name: 'Forgot Password',
+    name: 'Reset Password',
     label: 'Forgot Password',
     strategy: 'forgot_password',
-    path: '/forgot-password'
+    path: '/reset-password'
   },
   {
     name: 'Metadata',

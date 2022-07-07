@@ -1,7 +1,7 @@
 import { SignIn, useSignIn } from '@clerk/nextjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import common from '/styles/Common.module.css';
 import styles from '/styles/Form.module.css';
@@ -9,8 +9,12 @@ import styles from '/styles/Form.module.css';
 const SignInPage = () => {
   const { signIn, setSession } = useSignIn();
   const router = useRouter();
+  const form = useRef();
   const [strategy, setStrategy] = useState('');
   const [status, setStatus] = useState('');
+  const [notification, setNotification] = useState(null);
+  const handleError = (err) => console.error(err);
+
   const getButtonText = () => {
     if (!status && strategy !== 'password') {
       return 'Continue';
@@ -37,7 +41,7 @@ const SignInPage = () => {
     }
   };
 
-  const signInWithLink = async (strategy, status, formData) => {
+  const signInWithLink = async (strategy, redirectPath) => {
     const firstFactor = signIn.supportedFirstFactors.find(
       (f) => f.strategy === strategy
     );
@@ -47,20 +51,22 @@ const SignInPage = () => {
 
     const response = await startMagicLinkFlow({
       emailAddressId,
-      redirectUrl: `${window.location.origin}/?strategy=${strategy}`
+      redirectUrl: `${window.location.origin}${redirectPath}`
     });
 
     const verification = response.firstFactorVerification;
 
     if (verification.status === 'expired') {
-      // TODO: Handle expired links
+      setNotification({
+        type: 'warning',
+        text: 'Sign in link has expired.'
+      });
     }
 
     await cancelMagicLinkFlow();
+
     if (response.status === 'complete') {
-      setSession(response.createdSessionId, () =>
-        router.push(`/?strategy=${strategy}`)
-      );
+      setSession(response.createdSessionId, () => router.push(redirectPath));
     }
   };
 
@@ -102,24 +108,32 @@ const SignInPage = () => {
     event.preventDefault();
 
     if (!status) {
-      // Prepare sign in with strategy and identifier
-      const response = await signIn.create({
-        strategy,
-        identifier,
-        password: password || undefined,
-        redirect_url: `${window.location.origin}/?strategy=${strategy}`
-      });
-
-      setStatus(response.status);
-
-      if (response.status === 'complete') {
-        setSession(response.createdSessionId, () =>
-          router.push(`/?strategy=${strategy}`)
-        );
-      } else if (response.status === 'needs_second_factor') {
-        await response.prepareSecondFactor({
-          strategy: 'phone_code'
+      try {
+        // Prepare sign in with strategy and identifier
+        const response = await signIn.create({
+          strategy,
+          identifier,
+          password: password || undefined,
+          redirect_url: `${window.location.origin}/?strategy=${strategy}`
         });
+
+        setStatus(response.status);
+
+        if (response.status === 'complete') {
+          setSession(response.createdSessionId, () =>
+            router.push(`/?strategy=${strategy}`)
+          );
+        } else if (response.status === 'needs_second_factor') {
+          await response.prepareSecondFactor({
+            strategy: 'phone_code'
+          });
+        }
+      } catch (err) {
+        if (err?.errors?.[0]?.code === 'form_identifier_not_found') {
+          setStatus('error');
+        } else {
+          handleError(err);
+        }
       }
 
       return;
@@ -131,7 +145,7 @@ const SignInPage = () => {
 
     // Attempt sign in with applicable strategy
     if (strategy === 'email_link') {
-      return signInWithLink(strategy, status, formData);
+      return signInWithLink(strategy, `/?stratgey=${strategy}`);
     }
 
     if (strategy === 'email_code') {
@@ -139,9 +153,43 @@ const SignInPage = () => {
     }
   };
 
+  const handleReset = async () => {
+    const formData = new FormData(form.current);
+    const identifier = formData.get('email');
+    const strategy = 'email_link';
+    const redirectPath = '/reset-password';
+
+    if (!identifier) {
+      setNotification({
+        type: 'warning',
+        text: 'Email address not provided'
+      });
+      form.current.email.focus();
+    } else {
+      try {
+        await signIn.create({
+          identifier,
+          redirect_url: `${window.location.origin}${redirectPath}`
+        });
+
+        setNotification({
+          type: 'message',
+          text: 'Password reset link has been sent to your email'
+        });
+        signInWithLink(strategy, redirectPath);
+      } catch (err) {
+        if (err?.errors?.[0]?.code === 'form_identifier_not_found') {
+          setStatus('error');
+        } else {
+          handleError(err);
+        }
+      }
+    }
+  };
+
   return (
     <div className={common.container}>
-      <h1>Welcome back to Clerk Playground!</h1>
+      <h1 className={common.title}>Welcome back to Clerk Playground!</h1>
       <p>Been here before? Sign in using the form below.</p>
       <p>
         If it's your first time, you'll want to{' '}
@@ -150,7 +198,7 @@ const SignInPage = () => {
         </Link>{' '}
         instead.
       </p>
-      <form onSubmit={handleSubmit}>
+      <form ref={form} onSubmit={handleSubmit}>
         <div className={styles.field}>
           <label htmlFor="emailAddress">Email address</label>
           <input
@@ -246,6 +294,25 @@ const SignInPage = () => {
           {getButtonText()}
         </button>
       </form>
+      <p>
+        Forgot your password? Enter email then{' '}
+        <button className={common.link} type="button" onClick={handleReset}>
+          click here
+        </button>
+        .
+      </p>
+      {notification ? (
+        <div className={styles[notification.type]}>{notification.text}</div>
+      ) : null}
+      {status === 'error' && (
+        <div className={styles.warning}>
+          User account not found.{' '}
+          <Link href="/sign-up">
+            <a className={common.link}>Sign up</a>
+          </Link>{' '}
+          first.
+        </div>
+      )}
     </div>
   );
 };

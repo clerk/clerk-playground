@@ -28,7 +28,7 @@ const OAuthPage = () => {
       );
       const res = await accountToDelete
         .destroy()
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
       return res;
     }
   };

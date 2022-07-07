@@ -1,4 +1,4 @@
-import { useSignIn, useUser } from '@clerk/nextjs';
+import { useUser } from '@clerk/nextjs';
 import { useEffect, useRef, useState } from 'react';
 
 import common from '/styles/Common.module.css';
@@ -6,7 +6,6 @@ import styles from '/styles/Form.module.css';
 
 const OneTimePasscodes = () => {
   const { user } = useUser();
-  const { signIn } = useSignIn();
   const [status, setStatus] = useState('');
   const [emailStatus, setEmailStatus] = useState('');
   const formRef = useRef();
