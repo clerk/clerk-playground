@@ -56,10 +56,10 @@ export const FEATURE_LINKS = [
     path: '/mfa'
   },
   {
-    name: 'Forgot Password',
+    name: 'Reset Password',
     label: 'Forgot Password',
     strategy: 'forgot_password',
-    path: '/forgot-password'
+    path: '/reset-password'
   },
   {
     name: 'Metadata',
