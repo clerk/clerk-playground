@@ -10,9 +10,9 @@ export const FLOW_LINKS = [
     path: '/sign-up/password'
   },
   {
-    name: 'Sign up with code',
+    name: 'Sign up with passcode',
     strategy: 'email_code',
-    path: '#'
+    path: '/sign-up/passcode'
   },
   {
     name: 'Sign up with social',
