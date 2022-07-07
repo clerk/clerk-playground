@@ -1,3 +1,26 @@
+export const FLOW_LINKS = [
+  {
+    name: 'Sign up with magic link',
+    strategy: 'email_link',
+    path: '/sign-up'
+  },
+  {
+    name: 'Sign up with password',
+    strategy: 'password',
+    path: '/sign-up/password'
+  },
+  {
+    name: 'Sign up with code',
+    strategy: 'email_code',
+    path: '#'
+  },
+  {
+    name: 'Sign up with social',
+    strategy: 'oauth',
+    path: '#'
+  }
+];
+
 export const FEATURE_LINKS = [
   {
     name: 'Home',
