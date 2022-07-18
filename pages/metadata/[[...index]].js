@@ -109,7 +109,7 @@ const MetadataPage = () => {
         {birthday && (
           <p className={styles.message}>
             Your birthday is{' '}
-            {new Date(birthday).toLocaleDateString('en-US', {
+            {new Date(birthday + 'T00:00:00').toLocaleDateString('en-US', {
               dateStyle: 'long'
             })}
             !
