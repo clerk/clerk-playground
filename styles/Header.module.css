@@ -1,7 +1,11 @@
-.header {
+.header,
+.actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.header {
   padding: 10px 20px;
   background-color: #6455a2;
 }
@@ -27,4 +31,23 @@
 .link:focus {
   color: #a690ff;
   border-bottom-color: #a690ff;
+}
+
+.button {
+  margin-right: 20px;
+  padding: 4px 10px;
+  background-color: #fff;
+  border: 1px solid #bebebe;
+  border-radius: 4px;
+  color: #6455a2;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #e9e9e9;
 }
