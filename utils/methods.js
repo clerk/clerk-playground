@@ -80,6 +80,11 @@ export const SDK_METHODS = [
             type: 'text'
           },
           {
+            name: 'password',
+            placeholder: 'Password',
+            type: 'password'
+          },
+          {
             name: 'unsafeMetadata',
             placeholder: '{ "unsafe": "metadata" }',
             type: 'text'

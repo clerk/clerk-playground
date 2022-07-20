@@ -36,8 +36,8 @@ const Home = () => {
       </p>
       <p>
         ← Choose another feature of Clerk to explore or check out the{' '}
-        <Link href="/sdk-playground">
-          <a className={common.link}>SDK Playground</a>
+        <Link href="/sdk-explorer">
+          <a className={common.link}>SDK Explorer</a>
         </Link>
         .
       </p>

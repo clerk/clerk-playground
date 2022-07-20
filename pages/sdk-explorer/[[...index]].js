@@ -8,7 +8,7 @@ import common from '/styles/Common.module.css';
 import styles from '/styles/Explorer.module.css';
 import { useEffect } from 'react';
 
-const SDKPlayground = () => {
+const SDKExplorer = () => {
   const [activeMethod, setActiveMethod] = useState(null);
   const [output, setOutput] = useState(
     '← Click on a property or method to the left and view the results here.'
@@ -39,7 +39,7 @@ const SDKPlayground = () => {
         activeMethod={activeMethod}
       />
       <div className={styles.container}>
-        <h1 className={common.title}>SDK Playground</h1>
+        <h1 className={common.title}>SDK Explorer</h1>
         <Code>{output}</Code>
         {jwt ? (
           <>
@@ -52,4 +52,4 @@ const SDKPlayground = () => {
   );
 };
 
-export default SDKPlayground;
+export default SDKExplorer;
