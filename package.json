@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^3.6.6",
+    "jwt-decode": "^3.1.2",
     "next": "^12.1.6",
+    "prism-react-renderer": "^1.3.5",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
