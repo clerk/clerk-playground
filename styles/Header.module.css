@@ -33,13 +33,14 @@
   border-bottom-color: #a690ff;
 }
 
-.button {
+.button,
+.secondaryButton {
   margin-right: 20px;
   padding: 4px 10px;
-  background-color: #fff;
-  border: 1px solid #bebebe;
+  background-color: #f29e4c;
+  border: 1px solid #d48c44;
   border-radius: 4px;
-  color: #6455a2;
+  color: #fff;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -49,5 +50,17 @@
 
 .button:hover,
 .button:focus {
+  background-color: #f3ac66;
+  border-color: #f29e4c;
+}
+
+.secondaryButton {
+  background-color: #fff;
+  border: 1px solid #bebebe;
+  color: #6455a2;
+}
+
+.secondaryButton:hover,
+.secondaryButton:focus {
   background-color: #e9e9e9;
 }

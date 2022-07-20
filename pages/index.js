@@ -34,7 +34,13 @@ const Home = () => {
         ) : null}
         .
       </p>
-      <p>← Choose another feature of Clerk to explore.</p>
+      <p>
+        ← Choose another feature of Clerk to explore or check out the{' '}
+        <Link href="/sdk-explorer">
+          <a className={common.link}>SDK Explorer</a>
+        </Link>
+        .
+      </p>
     </div>
   );
 };
