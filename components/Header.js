@@ -13,8 +13,11 @@ const Header = () => {
         <a className={styles.logo}>Clerk Playground</a>
       </Link>
       <div className={styles.actions}>
+        <Link href="/sdk-playground">
+          <a className={styles.button}>Explore the SDK</a>
+        </Link>
         <a
-          className={styles.button}
+          className={styles.secondaryButton}
           href="https://github.com/clerkinc/clerk-playground/"
           target="_blank"
         >
