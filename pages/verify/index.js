@@ -22,7 +22,7 @@ const VerificationPage = () => {
     });
 
     if (response.status === 'complete') {
-      setSession(su.createdSessionId, () => router.push('/'));
+      setSession(response.createdSessionId, () => router.push('/'));
       return;
     }
   };

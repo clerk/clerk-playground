@@ -40,7 +40,6 @@ const PasscodeSignUp = () => {
 
     try {
       await signUp.create({
-        strategy,
         emailAddress
       });
 
