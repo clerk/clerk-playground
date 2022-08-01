@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
@@ -9,22 +10,31 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Link href="/">
-        <a className={styles.logo}>Clerk Playground</a>
-      </Link>
+      <div className={styles.content}>
+        <Link href="/">
+          <a className={styles.logo}>Clerk Playground</a>
+        </Link>
+        <a
+          className={styles.repo}
+          href="https://github.com/clerkinc/clerk-playground/"
+          target="_blank"
+          title="View source on GitHub"
+        >
+          <Image
+            alt="GitHub logo"
+            src="/logos/github.svg"
+            width={25}
+            height={25}
+          />
+        </a>
+      </div>
       <div className={styles.actions}>
         <SignedIn>
           <Link href="/sdk-explorer">
             <a className={styles.button}>Explore the SDK</a>
           </Link>
         </SignedIn>
-        <a
-          className={styles.secondaryButton}
-          href="https://github.com/clerkinc/clerk-playground/"
-          target="_blank"
-        >
-          View on GitHub
-        </a>
+
         <SignedOut>
           {asPath !== '/sign-in' ? (
             <p className={styles.p}>
