@@ -12,12 +12,13 @@ const Layout = ({ children }) => {
   const { isSignedIn } = useUser();
   const { asPath } = useRouter();
   const isSDK = asPath.startsWith('/sdk');
+  const hideNav = isSDK || asPath.startsWith('/components');
 
   return (
     <>
       <Header />
       <div className={styles.container}>
-        {isSDK ? null : (
+        {hideNav ? null : (
           <Navigation links={isSignedIn ? FEATURE_LINKS : FLOW_LINKS} />
         )}
         <main className={isSDK ? styles.explorer : styles.main}>

@@ -33,6 +33,9 @@ const Header = () => {
           <Link href="/sdk-explorer">
             <a className={styles.button}>Explore the SDK</a>
           </Link>
+          <Link href="/components">
+            <a className={styles.secondaryButton}>View Components</a>
+          </Link>
         </SignedIn>
 
         <SignedOut>
