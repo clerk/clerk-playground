@@ -19,6 +19,7 @@ import Layout from '/components/Layout';
  *  "/foo/[...bar]"  for pages/foo/[...bar].js
  */
 const publicPages = [
+  '/components/[[...index]]',
   '/sign-in/[[...index]]',
   '/sign-in/mfa',
   '/sign-up/[[...index]]',
