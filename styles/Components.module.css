@@ -1,0 +1,41 @@
+.header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.message {
+  max-width: 400px;
+  padding: 0.75rem 1.25rem;
+  color: #0197f6;
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 2px #0197f6;
+  border: 1px solid #062cf175;
+  border-radius: 0.25rem;
+}
+
+.message > p {
+  margin: 0;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  line-height: 1;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.link:hover,
+.link:focus {
+  border-bottom: 2px solid #0197f6;
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.25rem;
+}
