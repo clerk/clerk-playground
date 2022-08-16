@@ -5,7 +5,7 @@ const Components = () => {
   return (
     <div className={common.container} style={{ maxWidth: '95vw' }}>
       <header className={styles.header}>
-        <h1 className={common.title}>Components Appearance Editor</h1>
+        <h1 className={common.title}>Components Appearance Customizer</h1>
         <div className={styles.message}>
           <p>
             <strong>Note:</strong> IntelliSense code completion doesn't fully
@@ -42,7 +42,7 @@ const Components = () => {
           borderRadius: '4px',
           overflow: 'hidden'
         }}
-        title="Compoennts Appearance Editor"
+        title="Components Appearance Customizer"
         allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
         sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
       ></iframe>

@@ -18,6 +18,10 @@ export const FLOW_LINKS = [
     name: 'Sign up with social',
     strategy: 'oauth',
     path: '/sign-up/social'
+  },
+  {
+    name: 'Components Customizer',
+    path: '/components'
   }
 ];
 
@@ -68,6 +72,10 @@ export const FEATURE_LINKS = [
   {
     name: 'User Profile',
     path: '/user-profile'
+  },
+  {
+    name: 'Components Customizer',
+    path: '/components'
   }
 ];
 
